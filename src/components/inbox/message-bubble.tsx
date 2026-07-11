@@ -19,6 +19,7 @@ import { format } from "date-fns";
 import { ReplyQuote } from "./reply-quote";
 import { MessageReactions } from "./message-reactions";
 import { InteractivePreview } from "@/components/interactive/interactive-preview";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 interface MessageBubbleProps {
@@ -110,12 +111,16 @@ function MediaImage({ url, alt }: { url: string; alt: string }) {
   }
 
   return (
-    <img
-      src={src ?? ""}
-      alt={alt}
-      className="max-h-64 max-w-60 rounded-lg object-cover"
-      onError={() => setError(true)}
-    />
+    <div className="relative max-h-64 max-w-60">
+      <Image
+        src={src ?? ""}
+        alt={alt}
+        fill
+        className="rounded-lg object-cover"
+        onError={() => setError(true)}
+        sizes="240px"
+      />
+    </div>
   );
 }
 
